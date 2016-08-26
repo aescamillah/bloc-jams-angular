@@ -30,8 +30,15 @@
              currentBuzzObject.bind('timeupdate', function() {
                  $rootScope.$apply(function() {
                      SongPlayer.currentTime = currentBuzzObject.getTime();
+                     SongPlayer.volume = currentBuzzObject.getVolume();
                  });
              });
+              
+             /*currentBuzzObject.bind('volumeupdate', function() {
+                 $rootScope.$apply(function() {
+                     SongPlayer.volume = currentBuzzObject.getVolume();
+                 });
+             });*/
 
              SongPlayer.currentSong = song;
           };
@@ -78,6 +85,13 @@
          * @type {Number}
          */
          SongPlayer.currentTime = null;
+         
+         /**
+         * @desc Current volume
+         * @type {Number}
+         */
+         SongPlayer.volume = null;
+         SongPlayer.volumeMax = 100;
 
           SongPlayer.play = function(song) {
               song = song || SongPlayer.currentSong;
@@ -131,6 +145,12 @@
           SongPlayer.setCurrentTime = function(time) {
               if (currentBuzzObject) {
                   currentBuzzObject.setTime(time);
+              }
+          };
+        
+          SongPlayer.setVolume = function(volume) {
+              if (currentBuzzObject) {
+                  currentBuzzObject.setVolume(volume);
               }
           };
 
